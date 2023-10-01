@@ -1,16 +1,56 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import { useRouter } from "next/navigation";
-import { axios } from "axios";
+import axios  from "axios";
+
 
 const page = () => {
   const [user, setUser] = useState({
-    password: "",
-    email: "",
-  });
 
-  const onlogin = async () => {};
+    email: "",
+    password: "",
+  });
+  const router = useRouter();
+
+
+  const onlogin = async () => {
+    try{
+        const res = await axios.post('/api/users/login', user);
+        console.log(res.data);
+        router.push('/profile');
+
+
+
+    }catch(err :any){
+        console.log(err);
+
+
+    }
+
+
+  };
+
+
+    // useEffect(()=>{
+    //     if(user.email && user.password){
+    //         axios.post('http://localhost:3000/api/login', user)
+    //         .then((res)=>{
+    //             console.log(res.data);
+    //             if(res.data){
+    //                 Router.push('/home');
+    //             }
+    //         })
+    //         .catch((err)=>{
+    //             console.log(err);
+    //         })
+
+    //     }
+    // }, []);
+
+
+
+
   return (
     <>
       <div>Login page</div>

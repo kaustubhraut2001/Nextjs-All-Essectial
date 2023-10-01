@@ -1,17 +1,46 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { axios } from "axios";
+import axios from "axios";
 
 const page = () => {
+  const router = useRouter();
+
   const [user, setUser] = useState({
     username: "",
-    password: "",
     email: "",
+    password: "",
+
   });
 
-  const onsignup = async () => {};
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const[loadding , setLoading] = useState(false);
+  useEffect(() => {
+    if (user.username.length && user.password && user.email) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [user]);
+
+  const onsignup = async () => {
+
+    try{
+      setLoading(true);
+      const res = await axios.post('/api/users/signup',user);
+      console.log(res);
+      setLoading(false);
+      router.push('/login');
+
+    }catch(err){
+      console.log(err);
+
+    }finally{
+      setLoading(false);
+    }
+
+  };
   return (
     <>
       <div>Signup page</div>
@@ -49,9 +78,9 @@ const page = () => {
         placeholder="password"
       />
 
-      <button onClick={onsignup}>signup</button>
+      <button onClick={onsignup}>{buttonDisabled ? "No Signup" : "Signup"}</button>
 
-	  <Link href="/login">login</Link>
+      <Link href="/login">login</Link>
     </>
   );
 };

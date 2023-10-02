@@ -1,12 +1,12 @@
 import { getdatafromtoken } from "@/helper/getdatafrom token";
 
 import { NextRequest, NextResponse } from "next/server";
-import  User from '../../../../models/user'
-import dbConnect from '../../../../utils/dbConnect'
+import User from "@/models/Usermodel";
+import { conneccttodb } from "@/dbconfig/dbconnection";
 import { get } from "http";
 
-dbConnect();
-export async function GET(request : NextRequest , response : NextResponse){
+conneccttodb();
+export async function GET(request : NextRequest ){
 
 	try{
 		const userid = await getdatafromtoken(request);

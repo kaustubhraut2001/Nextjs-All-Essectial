@@ -1,3 +1,4 @@
+import { sendEmail } from "@/helper/mailer";
 import { conneccttodb } from "../../../../dbconfig/dbconnection";
 import User from "../../../../models/Usermodel";
 
@@ -43,6 +44,8 @@ export async function POST(request: NextRequest) {
 
     const savenewuser = await newuser.save();
     console.log(savenewuser);
+
+    sendEmail({ email, emailType: "VERIFY", userId: savenewuser._id });
 
     return NextResponse.json(
       {

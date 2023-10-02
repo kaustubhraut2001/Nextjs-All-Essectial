@@ -12,6 +12,7 @@
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.2",
     "next": "latest",
+    "nodemailer": "^6.9.5",
     "react": "latest",
     "react-dom": "latest"
   },
@@ -19,6 +20,7 @@
     "@types/bcryptjs": "^2.4.4",
     "@types/jsonwebtoken": "^9.0.3",
     "@types/node": "latest",
+    "@types/nodemailer": "^6.4.11",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "autoprefixer": "latest",
